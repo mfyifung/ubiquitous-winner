@@ -1,0 +1,17 @@
+/* global styles */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Nunito Sans', sans-serif;
+  background: #f5f6fa;
+}
+
+button {
+  font-family: 'Nunito Sans', sans-serif;
+}

@@ -1,0 +1,17 @@
+<div class="popover">
+  <div class="popover-title">{{ title }}</div>
+
+  <div class="pill-grid">
+    <button
+      type="button"
+      class="pill"
+      *ngFor="let option of options"
+      [class.pill--selected]="isSelected(option)"
+      (click)="toggle(option)"
+    >{{ option }}</button>
+  </div>
+
+  <div class="hint">{{ hint }}</div>
+
+  <button type="button" class="apply-btn" (click)="applyNow()">Apply Now</button>
+</div>

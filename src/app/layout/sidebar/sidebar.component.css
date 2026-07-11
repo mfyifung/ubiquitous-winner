@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  width: 240px;
+  min-width: 240px;
+  height: 100%;
+  background: #ffffff;
+  border-right: 1px solid #d8d8d8;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 24px;
+}
+
+.logo {
+  padding: 24px 0 24px 32px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.logo-dash {
+  color: #4880ff;
+}
+
+.logo-stack {
+  color: #202224;
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 50px;
+  padding-left: 32px;
+  color: #202224;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  background: #4880ff;
+  color: #ffffff;
+  border-radius: 0 25px 25px 0;
+  margin-right: 24px;
+  width: calc(100% - 24px - 32px);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.nav-icon--active {
+  filter: brightness(0) invert(1);
+}
+
+.nav-label--indent {
+  margin-left: 34px;
+}
+
+.divider {
+  height: 1px;
+  background: #d8d8d8;
+  margin: 8px 32px;
+}
+
+.pages-label {
+  padding-left: 32px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: #848484;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}

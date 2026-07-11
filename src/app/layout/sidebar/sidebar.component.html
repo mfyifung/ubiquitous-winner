@@ -1,0 +1,52 @@
+<aside class="sidebar">
+  <div class="logo">
+    <span class="logo-dash">Dash</span><span class="logo-stack">Stack</span>
+  </div>
+
+  <nav class="nav-group">
+    <a
+      *ngFor="let item of mainNav"
+      class="nav-item"
+      [class.active]="item.active"
+    >
+      <img
+        *ngIf="item.icon"
+        class="nav-icon"
+        [class.nav-icon--active]="item.active"
+        [src]="'assets/icons/' + item.icon + '.png'"
+        alt=""
+      />
+      <span class="nav-label">{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <div class="divider"></div>
+
+  <div class="pages-label">PAGES</div>
+
+  <nav class="nav-group">
+    <a *ngFor="let item of pagesNav" class="nav-item">
+      <img
+        *ngIf="item.icon"
+        class="nav-icon"
+        [src]="'assets/icons/' + item.icon + '.png'"
+        alt=""
+      />
+      <span class="nav-label" [class.nav-label--indent]="!item.icon">{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <div class="divider"></div>
+
+  <nav class="nav-group">
+    <a *ngFor="let item of bottomNav" class="nav-item">
+      <img
+        *ngIf="item.icon"
+        class="nav-icon"
+        [src]="'assets/icons/' + item.icon + '.png'"
+        alt=""
+      />
+      <span class="nav-label" [class.nav-label--indent]="!item.icon">{{ item.label }}</span>
+    </a>
+  </nav>
+</aside>

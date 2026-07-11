@@ -1,0 +1,117 @@
+:host {
+  display: block;
+  height: 70px;
+  min-height: 70px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.topbar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 31px 0 78px;
+  gap: 24px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f5f6fa;
+  border-radius: 8px;
+  height: 38px;
+  padding: 0 16px;
+  width: 388px;
+}
+
+.search-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.search-placeholder {
+  color: #848484;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 31px;
+}
+
+.bell-icon {
+  width: 24px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.lang {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 123px;
+}
+
+.flag {
+  width: 40px;
+  height: 27px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.lang-label {
+  color: #202224;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chevron {
+  width: 8px;
+  height: 5px;
+  object-fit: contain;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 169px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.profile-name {
+  color: #202224;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.profile-role {
+  color: #848484;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}

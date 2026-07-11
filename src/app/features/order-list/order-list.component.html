@@ -1,0 +1,128 @@
+<div class="order-list-page">
+  <h1 class="page-title">Order Lists</h1>
+
+  <div class="filter-bar">
+    <div class="filter-icon-cell">
+      <img src="assets/icons/funnel.png" alt="" class="funnel-icon" />
+    </div>
+
+    <div class="filter-label-cell">Filter By</div>
+
+    <div class="filter-divider"></div>
+
+    <div class="filter-control" [class.filter-control--open]="openPopover === 'date'">
+      <button type="button" class="filter-btn" (click)="toggle('date')">
+        <span>{{ formattedDateLabel(selectedDate) }}</span>
+        <img src="assets/icons/chevron-down-filter.png" alt="" class="chevron" />
+      </button>
+    </div>
+
+    <div class="filter-divider"></div>
+
+    <div class="filter-control" [class.filter-control--open]="openPopover === 'type'">
+      <button type="button" class="filter-btn" (click)="toggle('type')">
+        <span>Order Type</span>
+        <img src="assets/icons/chevron-down-filter.png" alt="" class="chevron" />
+      </button>
+    </div>
+
+    <div class="filter-divider"></div>
+
+    <div class="filter-control" [class.filter-control--open]="openPopover === 'status'">
+      <button type="button" class="filter-btn" (click)="toggle('status')">
+        <span>Order Status</span>
+        <img src="assets/icons/chevron-down-filter.png" alt="" class="chevron" />
+      </button>
+    </div>
+
+    <div class="filter-spacer"></div>
+
+    <button type="button" class="reset-btn" (click)="resetFilters()">
+      <img src="assets/icons/reset-filter.png" alt="" class="reset-icon" />
+      <span>Reset Filter</span>
+    </button>
+
+    <app-date-popover
+      *ngIf="openPopover === 'date'"
+      class="popover-anchor popover-anchor--date"
+      [selectedDate]="selectedDate"
+      (apply)="onDateApply($event)"
+    ></app-date-popover>
+
+    <app-multi-select-popover
+      *ngIf="openPopover === 'type'"
+      class="popover-anchor popover-anchor--type"
+      title="Select Order Type"
+      hint="*You can choose multiple Order type"
+      [options]="meta.types"
+      [selected]="selectedTypes"
+      (apply)="onTypeApply($event)"
+    ></app-multi-select-popover>
+
+    <app-multi-select-popover
+      *ngIf="openPopover === 'status'"
+      class="popover-anchor popover-anchor--status"
+      title="Select Order Status"
+      hint="*You can choose multiple Order Status"
+      [options]="meta.statuses"
+      [selected]="selectedStatuses"
+      (apply)="onStatusApply($event)"
+    ></app-multi-select-popover>
+  </div>
+
+  <div class="table-card">
+    <table class="orders-table">
+      <colgroup>
+        <col class="col-id" />
+        <col class="col-name" />
+        <col class="col-address" />
+        <col class="col-date" />
+        <col class="col-type" />
+        <col class="col-status" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>ADDRESS</th>
+          <th>DATE</th>
+          <th>TYPE</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of pagedOrders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.address }}</td>
+          <td>{{ formattedDate(order.date) }}</td>
+          <td>{{ order.type }}</td>
+          <td>
+            <span
+              class="status-pill"
+              [style.color]="statusColor(order.status)"
+              [style.background]="statusBg(order.status)"
+            >{{ order.status }}</span>
+          </td>
+        </tr>
+        <tr *ngIf="!loading && pagedOrders.length === 0">
+          <td colspan="6" class="empty-row">
+            {{ error ? error : 'No orders match the selected filters.' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-footer">
+    <span class="showing-label">Showing {{ pageStart | number: '2.0-0' }}-{{ pageEnd | number: '2.0-0' }} of {{ totalCount }}</span>
+    <div class="pagination-controls">
+      <button type="button" class="page-btn" (click)="prevPage()" [disabled]="page <= 1">
+        <img src="assets/icons/pagination-left.png" alt="Previous" />
+      </button>
+      <button type="button" class="page-btn" (click)="nextPage()" [disabled]="page >= pageCount">
+        <img src="assets/icons/pagination-left.png" alt="Next" class="flip" />
+      </button>
+    </div>
+  </div>
+</div>

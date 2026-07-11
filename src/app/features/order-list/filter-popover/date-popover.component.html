@@ -1,0 +1,35 @@
+<div class="popover date-popover">
+  <div class="calendar-header">
+    <span class="month-label">{{ monthLabel }}</span>
+    <div class="nav-buttons">
+      <button type="button" class="nav-btn" (click)="prevMonth()">&lsaquo;</button>
+      <button type="button" class="nav-btn" (click)="nextMonth()">&rsaquo;</button>
+    </div>
+  </div>
+
+  <table class="calendar-grid">
+    <thead>
+      <tr>
+        <th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of weeks">
+        <td *ngFor="let cell of week">
+          <button
+            type="button"
+            class="day-cell"
+            [class.day-cell--muted]="!cell.iso"
+            [class.day-cell--selected]="cell.iso && cell.iso === pending"
+            [disabled]="!cell.iso"
+            (click)="selectDay(cell)"
+          >{{ cell.day }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="hint">*You can choose multiple date</div>
+
+  <button type="button" class="apply-btn" (click)="applyNow()">Apply Now</button>
+</div>

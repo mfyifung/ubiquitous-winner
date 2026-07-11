@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.angular/
+/_figraw/
+/_ref/
+.agent-inbox/
+.specs/
