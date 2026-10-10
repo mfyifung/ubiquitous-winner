@@ -104,6 +104,9 @@ export class OrderListComponent implements OnInit {
   }
 
   get pagedOrders(): Order[] {
+    if (this.selectedDate) {
+      return this.allOrders; // frame #11: the whole day is listed, no pager
+    }
     const start = (this.page - 1) * this.pageSize;
     return this.allOrders.slice(start, start + this.pageSize);
   }

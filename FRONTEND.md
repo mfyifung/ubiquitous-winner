@@ -93,3 +93,4 @@ table and show the error; a `/meta` failure shows its own alert.
   0:8535, left) and **Next Date** (Bg 0:8525, text 0:8526, chevron 0:8529, right) — drawn with the design's chevron paths.
   Each steps the applied date ±1 day, re-queries `/api/orders?date=…` and updates the Date label
   (`proof/date-step.py` / `proof/date-step.png`: 05 Sep → Next → 06 Sep 2026, request `?date=2026-09-06`).
+  In this state **all** rows the server returns for that date are rendered (no 9-row slicing, as frame #11 lists the whole day).
