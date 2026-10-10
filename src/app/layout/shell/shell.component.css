@@ -1,7 +1,4 @@
-:host {
-  display: block;
-  height: 100%;
-}
+:host { display: block; }
 
 .shell {
   display: flex;
@@ -11,12 +8,15 @@
 
 .main {
   flex: 1;
+  min-width: 0;
+  margin-left: -1px; /* design: main bg starts at x=239 under the 240px sidebar */
+  background: #f5f6fa;
   display: flex;
   flex-direction: column;
-  min-width: 0;
 }
 
 .page {
   flex: 1;
-  padding: 32px;
+  position: relative;
+  padding: 0 30px 26px 31px;
 }

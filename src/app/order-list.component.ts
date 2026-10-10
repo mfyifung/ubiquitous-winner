@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { OrdersService } from '../../core/orders.service';
-import { Order, OrdersMeta } from '../../core/order.model';
+import { Subscription } from 'rxjs';
+import { OrdersService } from './orders.service';
+import { Order, OrdersMeta } from './order.model';
 import { DatePopoverComponent } from './filter-popover/date-popover.component';
 import { MultiSelectPopoverComponent } from './filter-popover/multi-select-popover.component';
+import { IconComponent } from './shared/icon.component';
 
 type PopoverKind = 'date' | 'type' | 'status' | null;
 
@@ -24,7 +26,7 @@ const MONTH_NAMES = [
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule, DatePopoverComponent, MultiSelectPopoverComponent],
+  imports: [CommonModule, DatePopoverComponent, MultiSelectPopoverComponent, IconComponent],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css',
 })
@@ -54,10 +56,13 @@ export class OrderListComponent implements OnInit {
     this.reload();
   }
 
+  private ordersSub?: Subscription;
+
   reload(): void {
+    this.ordersSub?.unsubscribe(); // drop a stale in-flight request
     this.loading = true;
     this.error = null;
-    this.ordersService
+    this.ordersSub = this.ordersService
       .getOrders({
         date: this.selectedDate,
         type: this.selectedTypes,
@@ -106,8 +111,11 @@ export class OrderListComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.filter-control') && !target.closest('.popover-anchor')) {
+    const path = event.composedPath() as HTMLElement[];
+    const inside = path.some(
+      (el) => el.classList?.contains('filter-control') || el.classList?.contains('popover-anchor'),
+    );
+    if (!inside) {
       this.openPopover = null;
     }
   }

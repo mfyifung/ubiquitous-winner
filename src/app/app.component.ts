@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShellComponent } from './layout/shell/shell.component';
-import { OrderListComponent } from './features/order-list/order-list.component';
+import { OrderListComponent } from './order-list.component';
 
 @Component({
   selector: 'app-root',

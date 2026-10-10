@@ -1,0 +1,44 @@
+:host { position: absolute; top: 59px; z-index: 20; }
+
+/* Calender UI frame: card 387 wide, r26, month label (31,25), nav squares 22x22 at (298,24)/(332,24) */
+.popover {
+  position: relative;
+  display: flow-root;
+  width: 387px;
+  padding: 0 0 27px;
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  font-family: 'Nunito Sans', sans-serif;
+  color: #202224;
+}
+.month-label { position: absolute; left: 31px; top: 25px; font-size: 15px; font-weight: 700; line-height: 20px; }
+.nav-btn {
+  position: absolute; top: 24px; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 4px;
+  background: #e7e9ee; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.nav-btn svg { opacity: 0.684; }
+.nav-prev { left: 298px; }
+.nav-next { left: 332px; }
+
+.rule { height: 1px; background: rgba(151, 151, 151, 0.5); }
+.rule-top { margin-top: 70px; }               /* y 296 */
+
+.weekdays { display: grid; grid-template-columns: repeat(7, 50.5px); margin: 24px 0 0 16px; font-size: 15px; font-weight: 700; line-height: 19px; text-align: center; }
+.week { display: grid; grid-template-columns: repeat(7, 50.5px); margin-left: 16px; height: 37px; align-items: center; }
+.week:first-of-type { margin-top: 0; }
+.weekdays + .week { margin-top: 17px; }
+
+.day-cell {
+  width: 40px; height: 40px; margin: 0 auto; padding: 0; border: 0; border-radius: 12px; background: transparent;
+  font-family: inherit; font-size: 15px; font-weight: 600; line-height: 20px; color: #202224; opacity: 0.5; cursor: pointer;
+}
+.day-cell:disabled { cursor: default; }
+.day-cell--selected { background: #6085ff; color: #ffffff; opacity: 1; }
+
+.rule-bottom { margin-top: 16px; }
+.hint { margin: 16px 0 0 31px; font-size: 14px; font-weight: 400; line-height: 19px; color: #434343; opacity: 0.826; }
+.apply-btn {
+  display: block; width: 129px; height: 36px; margin: 32px auto 0; border: 0; border-radius: 4px;
+  background: #4880ff; color: #ffffff; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+}

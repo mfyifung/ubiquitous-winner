@@ -1,0 +1,103 @@
+<div class="order-list-page">
+  <h1 class="page-title">Order Lists</h1>
+
+  <div class="filter-bar" [class.has-open]="openPopover !== null">
+    <div class="cell cell-icon">
+      <app-icon class="funnel" name="funnel"></app-icon>
+    </div>
+    <div class="divider"></div>
+
+    <div class="cell cell-label"><span class="cell-text">Filter By</span></div>
+    <div class="divider"></div>
+
+    <div class="cell filter-control cell-date" [class.dim]="openPopover !== null && openPopover !== 'date'" [class.open]="openPopover === 'date'" (click)="toggle('date')" (keydown.enter)="toggle('date')" tabindex="0" role="button">
+      <span class="cell-text">{{ formattedDateLabel(selectedDate) }}</span>
+      <app-icon class="chev" name="chevdown"></app-icon>
+    </div>
+    <div class="divider"></div>
+
+    <div class="cell filter-control cell-type" [class.dim]="openPopover !== null && openPopover !== 'type'" [class.open]="openPopover === 'type'" (click)="toggle('type')" (keydown.enter)="toggle('type')" tabindex="0" role="button">
+      <span class="cell-text">Order Type</span>
+      <app-icon class="chev" name="chevdown"></app-icon>
+    </div>
+    <div class="divider"></div>
+
+    <div class="cell filter-control cell-status" [class.dim]="openPopover !== null && openPopover !== 'status'" [class.open]="openPopover === 'status'" (click)="toggle('status')" (keydown.enter)="toggle('status')" tabindex="0" role="button">
+      <span class="cell-text">Order Status</span>
+      <app-icon class="chev" name="chevdown"></app-icon>
+    </div>
+    <div class="divider"></div>
+
+    <div class="cell cell-reset" (click)="resetFilters()" (keydown.enter)="resetFilters()" tabindex="0" role="button">
+      <app-icon class="replay" name="replay"></app-icon>
+      <span class="reset-text">Reset Filter</span>
+    </div>
+
+    <app-date-popover
+      *ngIf="openPopover === 'date'"
+      class="popover-anchor popover-anchor--date"
+      [selectedDate]="selectedDate"
+      (apply)="onDateApply($event)"
+    ></app-date-popover>
+
+    <app-multi-select-popover
+      *ngIf="openPopover === 'type'"
+      class="popover-anchor popover-anchor--type"
+      title="Select Order Type"
+      hint="*You can choose multiple Order type"
+      [options]="meta.types"
+      [selected]="selectedTypes"
+      (apply)="onTypeApply($event)"
+    ></app-multi-select-popover>
+
+    <app-multi-select-popover
+      *ngIf="openPopover === 'status'"
+      class="popover-anchor popover-anchor--status"
+      title="Select Order Status"
+      hint="*You can choose multiple Order Status"
+      [options]="meta.statuses"
+      [selected]="selectedStatuses"
+      (apply)="onStatusApply($event)"
+    ></app-multi-select-popover>
+  </div>
+
+  <div class="table-card">
+    <table class="orders-table">
+      <colgroup>
+        <col class="col-id" /><col class="col-name" /><col class="col-address" />
+        <col class="col-date" /><col class="col-type" /><col class="col-status" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c-id"><span>ID</span></th><th><span>NAME</span></th><th><span>ADDRESS</span></th><th><span>DATE</span></th><th><span>TYPE</span></th><th class="c-status"><span>STATUS</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let order of pagedOrders; let last = last">
+          <tr class="row">
+            <td class="c-id">{{ order.orderId }}</td>
+            <td>{{ order.name }}</td>
+            <td>{{ order.address }}</td>
+            <td>{{ formattedDate(order.date) }}</td>
+            <td>{{ order.type }}</td>
+            <td class="c-status"><span class="status-pill" [style.color]="statusColor(order.status)" [style.background]="statusBg(order.status)">{{ order.status }}</span></td>
+          </tr>
+          <tr *ngIf="!last" class="rule"><td colspan="6"></td></tr>
+        </ng-container>
+        <tr *ngIf="!loading && pagedOrders.length === 0" class="empty">
+          <td colspan="6" class="empty-row">{{ error ? error : 'No orders match the selected filters.' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-footer">
+    <span class="showing-label">Showing {{ pageStart }}-{{ pageEnd | number: '2.0-0' }} of {{ totalCount }}</span>
+    <div class="indicator">
+      <button type="button" class="page-btn page-prev" (click)="prevPage()" [disabled]="page <= 1" aria-label="Previous page"><app-icon name="arrowleft"></app-icon></button>
+      <span class="indicator-line"></span>
+      <button type="button" class="page-btn page-next" (click)="nextPage()" [disabled]="page >= pageCount" aria-label="Next page"><app-icon name="arrowright"></app-icon></button>
+      <app-icon class="arrow-box" name="arrowbox"></app-icon>
+    </div>
+  </div>
+</div>

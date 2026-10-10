@@ -1,0 +1,93 @@
+:host { display: block; }
+
+.order-list-page { padding-top: 30px; /* topbar ends y=70, title box y=100 */
+  font-family: 'Nunito Sans', sans-serif; color: #202224; position: relative; }
+
+.page-title {
+  margin: 0;
+  height: 44px;
+  width: fit-content;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: -0.114px;
+  color: #202224;
+}
+
+/* ---------- filter bar (frame x270 y167 818x70) ---------- */
+.filter-bar {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  min-width: 818px;   /* frame #9 = 818; grows with a long date label like frame #11 */
+  height: 70px;
+  margin-top: 23px;
+  margin-left: -1px;
+  border-radius: 10px;
+  background: #f9f9fb;
+  box-shadow: inset 0 0 0 1px #d5d5d5;
+}
+.divider { flex: none; width: 1px; height: 70px; background: #979797; opacity: 0.686; }
+.cell { flex: none; display: flex; align-items: center; height: 70px; font-size: 14px; font-weight: 700; line-height: 19px; color: #202224; white-space: nowrap; }
+.cell-icon { width: 68px; justify-content: center; }
+.funnel { margin-left: -1px; }
+.cell-label { padding: 0 26px 0 24px; }
+.filter-control { padding: 0 30px 0 24px; gap: 30px; cursor: pointer; transition: opacity .12s; }
+.cell-type { gap: 32px; }
+.filter-control.dim { opacity: 0.4; }
+.cell-reset { flex: 1 0 auto; padding: 0 40px 0 24px; gap: 8px; cursor: pointer; font-weight: 600; color: #ea0234; }
+.replay { margin-top: 0; }
+
+/* popovers hang off the bar: (left = frame x - bar x) */
+.popover-anchor { position: absolute; z-index: 20; top: 59px; }
+.popover-anchor--date { left: 34px; }
+.popover-anchor--type { left: 200px; }
+.popover-anchor--status { left: 320px; }
+
+/* ---------- table (card x269 y261 1141 wide) ---------- */
+.table-card {
+  margin-top: 24px;
+  width: 1141px;
+  margin-left: -1px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(185, 185, 185, 0.5), 0 3px 12px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+.orders-table { width: 1141px; table-layout: fixed; border-collapse: collapse; }
+.col-id { width: 176px; } .col-name { width: 202px; } .col-address { width: 249px; }
+.col-date { width: 194px; } .col-type { width: 171px; } .col-status { width: 149px; }
+
+.orders-table th, .orders-table td {
+  padding: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 14px; line-height: 19px; color: rgba(32, 34, 36, 0.9);
+}
+.orders-table thead tr { height: 49px; background: #fcfdfd; border-bottom: 1px solid #d5d5d5; }
+.orders-table th { font-weight: 800; }
+.orders-table th span { display: inline-block; }
+.orders-table th.c-status { padding-left: 16px; }
+.orders-table td { font-weight: 600; }
+.orders-table tr.row td { height: 75px; }
+.orders-table tr.row:last-child td { height: 76px; }
+.orders-table tr.rule td { height: 1px; padding: 0; background: rgba(151, 151, 151, 0.6); }
+.orders-table .c-id { padding-left: 31px; }
+.orders-table td.c-status { padding-left: 0; }
+
+.status-pill {
+  display: block; box-sizing: border-box; width: 93px; height: 27px;
+  border-radius: 4.5px; text-align: center; font-size: 12px; font-weight: 700; line-height: 27px;
+}
+.empty-row { text-align: center; color: #848484; padding: 40px; }
+
+/* ---------- footer ---------- */
+.pagination-footer { position: relative; height: 30px; margin-top: 20px; margin-left: -1px; width: 1141px; display: flex; align-items: center; justify-content: space-between; }
+.showing-label { font-size: 14px; font-weight: 600; line-height: 19px; opacity: 0.6; }
+.indicator { position: relative; display: flex; width: 86px; height: 30px; border-radius: 8px; background: #fafbfd; box-shadow: inset 0 0 0 1px #d5d5d5; }
+.page-btn { width: 43px; height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.page-prev app-icon { margin-left: -1px; opacity: 0.6; }
+/* the design's mirrored arrow frame: chevron path at x+69; its transparent 24x23 bounding path (node 0:9010) sits at x+77 */
+.page-next app-icon { position: absolute; left: 69px; top: 9.24px; }
+.arrow-box { position: absolute; left: 77px; top: 3.48px; pointer-events: none; }
+.indicator-line { width: 1px; height: 30px; background: #979797; opacity: 0.7; }
+.page-btn:disabled { cursor: default; }
