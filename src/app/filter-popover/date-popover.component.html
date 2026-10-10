@@ -1,0 +1,28 @@
+<div class="popover date-popover">
+  <span class="month-label">{{ monthLabel }}</span>
+  <button type="button" class="nav-btn nav-prev" (click)="prevMonth()" aria-label="Previous month">
+    <svg width="12" height="7.4" viewBox="0 0 12 7.4" aria-hidden="true"><path d="M1.41 7.4L6 2.82L10.59 7.4L12 5.99L6 0L0 5.99L1.41 7.4Z" fill="#121212" transform="rotate(-90 6 3.7)"/></svg>
+  </button>
+  <button type="button" class="nav-btn nav-next" (click)="nextMonth()" aria-label="Next month">
+    <svg width="12" height="7.4" viewBox="0 0 12 7.4" aria-hidden="true"><path d="M1.41 7.4L6 2.82L10.59 7.4L12 5.99L6 0L0 5.99L1.41 7.4Z" fill="#121212" transform="rotate(90 6 3.7)"/></svg>
+  </button>
+  <div class="rule rule-top"></div>
+
+  <div class="weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+
+  <div class="week" *ngFor="let week of weeks">
+    <button
+      type="button"
+      class="day-cell"
+      *ngFor="let cell of week"
+      [class.day-cell--muted]="!cell.iso"
+      [class.day-cell--selected]="cell.iso && cell.iso === pending"
+      [disabled]="!cell.iso"
+      (click)="selectDay(cell)"
+    >{{ cell.day }}</button>
+  </div>
+
+  <div class="rule rule-bottom"></div>
+  <div class="hint">*You can choose multiple date</div>
+  <button type="button" class="apply-btn" (click)="applyNow()">Apply Now</button>
+</div>

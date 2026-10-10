@@ -1,0 +1,28 @@
+:host { position: absolute; top: 59px; z-index: 20; }
+
+/* POP-UP frame: 521 wide, r26; title (24,24) 18/700; pills 147x34 r17 on a 3-col grid (pitch 163x50) */
+.popover {
+  width: 521px;
+  padding: 24px;
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  font-family: 'Nunito Sans', sans-serif;
+  color: #202224;
+}
+.popover-title { font-size: 18px; font-weight: 700; line-height: 25px; }
+.pill-grid { display: grid; grid-template-columns: repeat(3, 147px); gap: 16px; margin-top: 23px; }
+
+.pill {
+  box-sizing: border-box; width: 147px; height: 34px; padding: 0; border-radius: 17px;
+  border: 0.6px solid #979797; background: transparent; color: #202224;
+  font-family: inherit; font-size: 14px; font-weight: 600; line-height: 19px; cursor: pointer;
+}
+.pill--selected { background: #4880ff; border-color: #4880ff; color: #ffffff; }
+
+.popover-rule { margin: 24px -24px 0; height: 1px; background: rgba(151, 151, 151, 0.5); }
+.hint { margin-top: 16px; font-size: 14px; font-weight: 400; line-height: 19px; color: #434343; opacity: 0.826; }
+.apply-btn {
+  display: block; width: 129px; height: 36px; margin: 32px auto 0; border: 0; border-radius: 4px;
+  background: #4880ff; color: #ffffff; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+}
