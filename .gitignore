@@ -2,6 +2,11 @@ node_modules/
 dist/
 .angular/
 /_figraw/
-/_ref/
+/_ref/*
+!/_ref/design.json
+!/_ref/target.png
+/design/_figraw/
+/design/*.op
 .agent-inbox/
 .specs/
+/design/sample.fig

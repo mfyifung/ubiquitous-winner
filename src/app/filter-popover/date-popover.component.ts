@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface DayCell {
   day: number | null;
@@ -18,7 +18,7 @@ const MONTH_NAMES = [
   templateUrl: './date-popover.component.html',
   styleUrl: './date-popover.component.css',
 })
-export class DatePopoverComponent {
+export class DatePopoverComponent implements OnInit {
   @Input() selectedDate: string | null = null;
   @Output() apply = new EventEmitter<string | null>();
 
@@ -27,17 +27,32 @@ export class DatePopoverComponent {
   pending: string | null;
 
   constructor() {
-    const base = this.selectedDate ? new Date(this.selectedDate) : new Date();
-    this.viewYear = base.getFullYear();
-    this.viewMonth = base.getMonth();
+    const now = new Date();
+    this.viewYear = now.getFullYear();
+    this.viewMonth = now.getMonth();
+    this.pending = null;
+  }
+
+  ngOnInit(): void {
+    // @Input is bound after construction — derive the visible month from the applied date here
     this.pending = this.selectedDate;
+    if (this.selectedDate) {
+      const [y, m] = this.selectedDate.split('-').map((v) => parseInt(v, 10));
+      if (y && m) {
+        this.viewYear = y;
+        this.viewMonth = m - 1;
+      }
+    }
+    this.weeks = this.buildWeeks();
   }
 
   get monthLabel(): string {
     return `${MONTH_NAMES[this.viewMonth]} ${this.viewYear}`;
   }
 
-  get weeks(): DayCell[][] {
+  weeks: DayCell[][] = [];
+
+  private buildWeeks(): DayCell[][] {
     const firstOfMonth = new Date(this.viewYear, this.viewMonth, 1);
     const startWeekday = firstOfMonth.getDay(); // 0=Sun
     const daysInMonth = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
@@ -70,6 +85,7 @@ export class DatePopoverComponent {
       this.viewMonth = 11;
       this.viewYear -= 1;
     }
+    this.weeks = this.buildWeeks();
   }
 
   nextMonth(): void {
@@ -78,6 +94,7 @@ export class DatePopoverComponent {
       this.viewMonth = 0;
       this.viewYear += 1;
     }
+    this.weeks = this.buildWeeks();
   }
 
   selectDay(cell: DayCell): void {

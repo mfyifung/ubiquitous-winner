@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { OrdersService } from '../../core/orders.service';
-import { Order, OrdersMeta } from '../../core/order.model';
+import { Subscription } from 'rxjs';
+import { OrdersService } from './orders.service';
+import { Order, OrdersMeta } from './order.model';
 import { DatePopoverComponent } from './filter-popover/date-popover.component';
 import { MultiSelectPopoverComponent } from './filter-popover/multi-select-popover.component';
+import { IconComponent } from './shared/icon.component';
 
 type PopoverKind = 'date' | 'type' | 'status' | null;
 
@@ -24,7 +26,7 @@ const MONTH_NAMES = [
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule, DatePopoverComponent, MultiSelectPopoverComponent],
+  imports: [CommonModule, DatePopoverComponent, MultiSelectPopoverComponent, IconComponent],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css',
 })
@@ -43,21 +45,25 @@ export class OrderListComponent implements OnInit {
 
   loading = false;
   error: string | null = null;
+  metaError: string | null = null;
 
   constructor(private readonly ordersService: OrdersService) {}
 
   ngOnInit(): void {
     this.ordersService.getMeta().subscribe({
       next: (meta) => (this.meta = meta),
-      error: () => (this.error = 'Failed to load filter options'),
+      error: () => (this.metaError = 'Failed to load filter options'),
     });
     this.reload();
   }
 
+  private ordersSub?: Subscription;
+
   reload(): void {
+    this.ordersSub?.unsubscribe(); // drop a stale in-flight request
     this.loading = true;
     this.error = null;
-    this.ordersService
+    this.ordersSub = this.ordersService
       .getOrders({
         date: this.selectedDate,
         type: this.selectedTypes,
@@ -69,6 +75,8 @@ export class OrderListComponent implements OnInit {
           this.loading = false;
         },
         error: () => {
+          this.allOrders = []; // never show stale, unfiltered rows under an applied filter
+          this.page = 1;
           this.error = 'Failed to load orders';
           this.loading = false;
         },
@@ -96,6 +104,9 @@ export class OrderListComponent implements OnInit {
   }
 
   get pagedOrders(): Order[] {
+    if (this.selectedDate) {
+      return this.allOrders; // frame #11: the whole day is listed, no pager
+    }
     const start = (this.page - 1) * this.pageSize;
     return this.allOrders.slice(start, start + this.pageSize);
   }
@@ -106,8 +117,11 @@ export class OrderListComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.filter-control') && !target.closest('.popover-anchor')) {
+    const path = event.composedPath() as HTMLElement[];
+    const inside = path.some(
+      (el) => el.classList?.contains('filter-control') || el.classList?.contains('popover-anchor'),
+    );
+    if (!inside) {
       this.openPopover = null;
     }
   }
@@ -152,6 +166,16 @@ export class OrderListComponent implements OnInit {
     if (this.page < this.pageCount) {
       this.page += 1;
     }
+  }
+
+  /** Frame #11 "Prev. Date" / "Next Date": move the applied date by one day and re-query the server. */
+  stepDate(delta: number): void {
+    if (!this.selectedDate) {
+      return;
+    }
+    const [y, m, d] = this.selectedDate.split('-').map((v) => parseInt(v, 10));
+    const next = new Date(Date.UTC(y, m - 1, d + delta));
+    this.onDateApply(next.toISOString().slice(0, 10));
   }
 
   formattedDate(iso: string): string {
