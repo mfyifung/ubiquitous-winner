@@ -61,6 +61,7 @@
     ></app-multi-select-popover>
   </div>
 
+  <p *ngIf="metaError" class="meta-error" role="alert">{{ metaError }}</p>
   <div class="table-card">
     <table class="orders-table">
       <colgroup>

@@ -48,16 +48,16 @@
 /* ---------- table (card x269 y261 1141 wide) ---------- */
 .table-card {
   margin-top: 24px;
-  width: 1141px;
+  width: 100%; max-width: 1141px;
   margin-left: -1px;
   border-radius: 14px;
   background: #ffffff;
   box-shadow: 0 0 0 1px rgba(185, 185, 185, 0.5), 0 3px 12px rgba(0, 0, 0, 0.03);
   overflow: hidden;
 }
-.orders-table { width: 1141px; table-layout: fixed; border-collapse: collapse; }
-.col-id { width: 176px; } .col-name { width: 202px; } .col-address { width: 249px; }
-.col-date { width: 194px; } .col-type { width: 171px; } .col-status { width: 149px; }
+.orders-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.col-id { width: 15.425%; } .col-name { width: 17.704%; } .col-address { width: 21.823%; }
+.col-date { width: 17.003%; } .col-type { width: 14.987%; } .col-status { width: 13.059%; }
 
 .orders-table th, .orders-table td {
   padding: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -81,7 +81,7 @@
 .empty-row { text-align: center; color: #848484; padding: 40px; }
 
 /* ---------- footer ---------- */
-.pagination-footer { position: relative; height: 30px; margin-top: 20px; margin-left: -1px; width: 1141px; display: flex; align-items: center; justify-content: space-between; }
+.pagination-footer { position: relative; height: 30px; margin-top: 20px; margin-left: -1px; width: 100%; max-width: 1141px; display: flex; align-items: center; justify-content: space-between; }
 .showing-label { font-size: 14px; font-weight: 600; line-height: 19px; opacity: 0.6; }
 .indicator { position: relative; display: flex; width: 86px; height: 30px; border-radius: 8px; background: #fafbfd; box-shadow: inset 0 0 0 1px #d5d5d5; }
 .page-btn { width: 43px; height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -91,3 +91,4 @@
 .arrow-box { position: absolute; left: 77px; top: 3.48px; pointer-events: none; }
 .indicator-line { width: 1px; height: 30px; background: #979797; opacity: 0.7; }
 .page-btn:disabled { cursor: default; }
+.meta-error { margin: 12px 0 0; color: #ea0234; font-size: 14px; font-weight: 600; }

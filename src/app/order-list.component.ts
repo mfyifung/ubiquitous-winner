@@ -45,13 +45,14 @@ export class OrderListComponent implements OnInit {
 
   loading = false;
   error: string | null = null;
+  metaError: string | null = null;
 
   constructor(private readonly ordersService: OrdersService) {}
 
   ngOnInit(): void {
     this.ordersService.getMeta().subscribe({
       next: (meta) => (this.meta = meta),
-      error: () => (this.error = 'Failed to load filter options'),
+      error: () => (this.metaError = 'Failed to load filter options'),
     });
     this.reload();
   }
@@ -74,6 +75,8 @@ export class OrderListComponent implements OnInit {
           this.loading = false;
         },
         error: () => {
+          this.allOrders = []; // never show stale, unfiltered rows under an applied filter
+          this.page = 1;
           this.error = 'Failed to load orders';
           this.loading = false;
         },

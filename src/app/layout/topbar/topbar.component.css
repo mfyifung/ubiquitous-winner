@@ -5,22 +5,23 @@
   height: 70px;
   font-family: 'Nunito Sans', sans-serif;
 }
-.topbar > * { position: absolute; }
+.topbar > *, .right > * { position: absolute; }
+.right { right: 0; top: 0; width: 404px; height: 70px; } /* right-anchored group: design x796..1200 at 1440 */
 
 .search { left: 78px; top: 16px; width: 388px; height: 38px; border-radius: 19px; background: #f5f6fa; }
 .search-text { position: absolute; left: 45px; top: 10px; font-size: 14px; font-weight: 400; line-height: 19px; color: #202224; opacity: 0.5; }
 .search-icon { left: 91px; top: 27px; }
 
-.bell-halo { left: 808px; top: 18px; }
-.bell { left: 796px; top: 24px; }
-.badge { left: 809px; top: 19px; }
-.badge-count { left: 813px; top: 19px; width: 8px; text-align: center; font-size: 12px; font-weight: 700; line-height: 16px; color: #ffffff; }
+.bell-halo { left: 12px; top: 18px; }
+.bell { left: 0px; top: 24px; }
+.badge { left: 13px; top: 19px; }
+.badge-count { left: 17px; top: 19px; width: 8px; text-align: center; font-size: 12px; font-weight: 700; line-height: 16px; color: #ffffff; }
 
-.flag { left: 851px; top: 22px; width: 40px; height: 27px; object-fit: cover; }
-.lang { left: 907px; top: 27px; font-size: 14px; font-weight: 600; line-height: 19px; color: #646464; }
-.lang-caret { left: 966px; top: 32px; }
+.flag { left: 55px; top: 22px; width: 40px; height: 27px; object-fit: cover; }
+.lang { left: 111px; top: 27px; font-size: 14px; font-weight: 600; line-height: 19px; color: #646464; }
+.lang-caret { left: 170px; top: 32px; }
 
-.avatar { left: 1001px; top: 13px; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
-.profile-name { left: 1065px; top: 16px; font-size: 14px; font-weight: 700; line-height: 19px; color: #404040; }
-.profile-role { left: 1065px; top: 38px; font-size: 12px; font-weight: 600; line-height: 16px; color: #565656; }
-.more { left: 1151.8px; top: 25.8px; }
+.avatar { left: 205px; top: 13px; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.profile-name { left: 269px; top: 16px; font-size: 14px; font-weight: 700; line-height: 19px; color: #404040; }
+.profile-role { left: 269px; top: 38px; font-size: 12px; font-weight: 600; line-height: 16px; color: #565656; }
+.more { left: 355.8px; top: 25.8px; }

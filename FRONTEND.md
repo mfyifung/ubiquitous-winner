@@ -72,7 +72,17 @@ the table are live API data, so they differ from the mockup's sample rows by des
 * `dx-ui-audit --url http://localhost:4200 --ref _ref/design.json --wait table --data-selector "tbody" --out _ref/ui`
   → **PASS, 0 errors** (50 warnings: empty `<col>`/path slots, status-pill contrast of the design's own colours, ±7px label
   width from live data); structural pass `dx-ui-audit --url http://localhost:4200 --out _ref/sanity` → **0 errors**.
-* Browser check with the **webwright skill, keyless** (Claude Code drives Playwright **Firefox**, 1440×1070, no
+* Browser check with the **webwright skill, keyless** (Claude Code drives Playwright **Firefox**, 1280×1800, no
   `full_page`; no API keys, no `webwright` CLI): `proof/order-list.py` loads the page against the live backend, screenshots
   the rows, opens the designed Order Type popover, checks two options, applies, and screenshots the server-filtered
   table (`proof/order-list.png`, `popover-open.png`, `filtered.png`).
+
+## Row count vs API
+`/api/orders` returns 14 rows; the table shows **9 per page by design** (the design's pagination footer, "Showing 1-9 of 14",
+page size 9 client-side over the full server result). Page 2 shows the remaining 5. Filtering stays server-side.
+
+## Layout at narrower viewports (1280×1800 webwright proof)
+The design frame is 1440 wide. The main column, table card (`width:100%; max-width:1141px`, column widths as % of 1141) and
+pagination are fluid, and the top-bar right group (bell … profile) is anchored to the right edge, so all six columns, the
+pagination and the profile block are visible at 1280 and pixel-identical in geometry at 1440. Order-load errors clear the
+table and show the error; a `/meta` failure shows its own alert.
