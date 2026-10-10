@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 @Component({
   selector: 'app-multi-select-popover',
@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './multi-select-popover.component.html',
   styleUrl: './multi-select-popover.component.css',
 })
-export class MultiSelectPopoverComponent {
+export class MultiSelectPopoverComponent implements OnChanges {
   @Input() title = '';
   @Input() hint = '';
   @Input() options: string[] = [];

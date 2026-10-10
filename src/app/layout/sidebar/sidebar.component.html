@@ -1,52 +1,27 @@
 <aside class="sidebar">
-  <div class="logo">
-    <span class="logo-dash">Dash</span><span class="logo-stack">Stack</span>
-  </div>
+  <div class="logo">Dash<span class="logo-stack">Stack</span></div>
 
-  <nav class="nav-group">
-    <a
-      *ngFor="let item of mainNav"
-      class="nav-item"
-      [class.active]="item.active"
-    >
-      <img
-        *ngIf="item.icon"
-        class="nav-icon"
-        [class.nav-icon--active]="item.active"
-        [src]="'assets/icons/' + item.icon + '.png'"
-        alt=""
-      />
-      <span class="nav-label">{{ item.label }}</span>
+  <ng-template #item let-it>
+    <a class="nav-item" [class.active]="it.active" href="javascript:void(0)">
+      <app-icon *ngIf="it.icon" class="nav-icon" [name]="it.active ? it.icon + '-active' : it.icon"></app-icon>
+      <span class="nav-label">{{ it.label }}</span>
     </a>
+  </ng-template>
+
+  <nav class="group group-main">
+    <ng-container *ngFor="let it of mainNav"><ng-container *ngTemplateOutlet="item; context: { $implicit: it }"></ng-container></ng-container>
   </nav>
 
-  <div class="divider"></div>
-
+  <div class="divider divider-1"></div>
   <div class="pages-label">PAGES</div>
 
-  <nav class="nav-group">
-    <a *ngFor="let item of pagesNav" class="nav-item">
-      <img
-        *ngIf="item.icon"
-        class="nav-icon"
-        [src]="'assets/icons/' + item.icon + '.png'"
-        alt=""
-      />
-      <span class="nav-label" [class.nav-label--indent]="!item.icon">{{ item.label }}</span>
-    </a>
+  <nav class="group group-pages">
+    <ng-container *ngFor="let it of pagesNav"><ng-container *ngTemplateOutlet="item; context: { $implicit: it }"></ng-container></ng-container>
   </nav>
 
-  <div class="divider"></div>
+  <div class="divider divider-2"></div>
 
-  <nav class="nav-group">
-    <a *ngFor="let item of bottomNav" class="nav-item">
-      <img
-        *ngIf="item.icon"
-        class="nav-icon"
-        [src]="'assets/icons/' + item.icon + '.png'"
-        alt=""
-      />
-      <span class="nav-label" [class.nav-label--indent]="!item.icon">{{ item.label }}</span>
-    </a>
+  <nav class="group group-bottom">
+    <ng-container *ngFor="let it of bottomNav"><ng-container *ngTemplateOutlet="item; context: { $implicit: it }"></ng-container></ng-container>
   </nav>
 </aside>

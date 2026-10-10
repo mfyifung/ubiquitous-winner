@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { IconComponent } from '../../shared/icon.component';
 
 interface NavItem {
   label: string;
-  icon: string | null; // asset filename under /assets/icons, or null (no recoverable design icon)
+  /** key into shared/icons.ts (design master "Element / icon / <name>"); null = the design has no master for this glyph */
+  icon: string | null;
   active?: boolean;
 }
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -32,11 +34,11 @@ export class SidebarComponent {
     { label: 'Invoice', icon: 'invoice' },
     { label: 'UI Elements', icon: 'uielement' },
     { label: 'Team', icon: 'team' },
-    { label: 'Table', icon: null },
+    { label: 'Table', icon: 'table' },
   ];
 
   readonly bottomNav: NavItem[] = [
     { label: 'Settings', icon: 'settings' },
-    { label: 'Logout', icon: null },
+    { label: 'Logout', icon: 'logout' },
   ];
 }
