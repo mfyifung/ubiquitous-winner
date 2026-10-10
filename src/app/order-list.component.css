@@ -92,3 +92,11 @@
 .indicator-line { width: 1px; height: 30px; background: #979797; opacity: 0.7; }
 .page-btn:disabled { cursor: default; }
 .meta-error { margin: 12px 0 0; color: #ea0234; font-size: 14px; font-weight: 600; }
+/* frame #11 date-applied footer: two 124x32 bordered buttons (Bg 0:8531 / 0:8525) */
+.date-footer { height: 32px; }
+.date-step { position: relative; box-sizing: border-box; width: 124px; height: 32px; padding: 0; border: 0; border-radius: 8px; background: #fafbfd;
+  box-shadow: inset 0 0 0 0.6px #d5d5d5; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600; line-height: 19px; color: #202224; }
+.date-step span { position: absolute; top: 6.5px; opacity: 0.6; white-space: nowrap; }
+.date-step app-icon { position: absolute; top: 10.24px; }
+.date-prev span { left: 38px; } .date-prev app-icon { left: 16px; }
+.date-next span { left: 21px; } .date-next app-icon { left: 110px; }

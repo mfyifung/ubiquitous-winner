@@ -92,6 +92,11 @@
     </table>
   </div>
 
+  <div class="pagination-footer date-footer" *ngIf="selectedDate; else pagingFooter">
+    <button type="button" class="date-step date-prev" (click)="stepDate(-1)" aria-label="Previous date"><app-icon name="arrowleft"></app-icon><span>Prev. Date</span></button>
+    <button type="button" class="date-step date-next" (click)="stepDate(1)" aria-label="Next date"><span>Next Date</span><app-icon name="arrowright"></app-icon></button>
+  </div>
+  <ng-template #pagingFooter>
   <div class="pagination-footer">
     <span class="showing-label">Showing {{ pageStart }}-{{ pageEnd | number: '2.0-0' }} of {{ totalCount }}</span>
     <div class="indicator">
@@ -101,4 +106,5 @@
       <app-icon class="arrow-box" name="arrowbox"></app-icon>
     </div>
   </div>
+  </ng-template>
 </div>

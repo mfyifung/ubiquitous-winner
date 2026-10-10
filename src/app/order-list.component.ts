@@ -165,6 +165,16 @@ export class OrderListComponent implements OnInit {
     }
   }
 
+  /** Frame #11 "Prev. Date" / "Next Date": move the applied date by one day and re-query the server. */
+  stepDate(delta: number): void {
+    if (!this.selectedDate) {
+      return;
+    }
+    const [y, m, d] = this.selectedDate.split('-').map((v) => parseInt(v, 10));
+    const next = new Date(Date.UTC(y, m - 1, d + delta));
+    this.onDateApply(next.toISOString().slice(0, 10));
+  }
+
   formattedDate(iso: string): string {
     const [y, m, d] = iso.split('-').map((v) => parseInt(v, 10));
     if (!y || !m || !d) {

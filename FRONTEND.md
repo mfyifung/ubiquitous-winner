@@ -86,3 +86,10 @@ The design frame is 1440 wide. The main column, table card (`width:100%; max-wid
 pagination are fluid, and the top-bar right group (bell … profile) is anchored to the right edge, so all six columns, the
 pagination and the profile block are visible at 1280 and pixel-identical in geometry at 1440. Order-load errors clear the
 table and show the error; a `/meta` failure shows its own alert.
+
+## Footer by state (frame #11 "Prev. Date" / "Next Date")
+* No date applied (frames #9, #12–#15 pattern): "Showing 1-09 of 14" + the pagination indicator (client paging, 9/page).
+* Date applied (frame #11): the footer becomes two 124×32 bordered buttons — **Prev. Date** (Bg 0:8531, text 0:8532, chevron
+  0:8535, left) and **Next Date** (Bg 0:8525, text 0:8526, chevron 0:8529, right) — drawn with the design's chevron paths.
+  Each steps the applied date ±1 day, re-queries `/api/orders?date=…` and updates the Date label
+  (`proof/date-step.py` / `proof/date-step.png`: 05 Sep → Next → 06 Sep 2026, request `?date=2026-09-06`).
